@@ -1,28 +1,32 @@
 package com.example.springboot.models;
 
-import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity
-@Table(name = "product")
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
-public class ProductModel implements Serializable{
+import org.springframework.hateoas.RepresentationModel;
+
+@Entity
+@Table(name = "products")
+public class ProductModel extends RepresentationModel<ProductModel> implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idProduct;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idProduct;
     private String name;
     private BigDecimal value;
 
-    public UUID getIdProduct() {
+    public Long getIdProduct() {
         return idProduct;
     }
 
-    public void setIdProduct(UUID idProduct) {
+    public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
 
